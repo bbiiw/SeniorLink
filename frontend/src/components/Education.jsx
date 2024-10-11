@@ -14,7 +14,7 @@ const Education = ({ profileData, setProfileData }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfileData({
-      ...profileData,
+      ...profileData,  //... เก็บข้อมูลก่อนหน้า
       education: {
         ...profileData.education,
         [name]: value,
