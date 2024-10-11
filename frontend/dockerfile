@@ -18,8 +18,8 @@ RUN npm install
 # คัดลอกโค้ดทั้งหมด
 COPY . .
 
-# เปิดพอร์ต 3000 สำหรับ Vite Development Server
-EXPOSE 3000
+# เปิดพอร์ต 5173 สำหรับ Vite Development Server
+EXPOSE 5173
 
 # เริ่ม Vite Development Server
 CMD ["npm", "run", "dev"]

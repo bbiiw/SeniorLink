@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000, // เปลี่ยนพอร์ตที่นี่
+    port: 5173, // เปลี่ยนพอร์ตที่นี่
     host: true, // เปิดให้เข้าถึงจากเครือข่ายอื่น ๆ
   },
 });
