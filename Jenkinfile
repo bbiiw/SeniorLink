@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE    = 'earth123456789/SeniorLink' // Docker image name
+        REMOTE_HOST     = 'tuchsanai@34.124.197.62' // Replace with your actual username and remote IP
+        SSH_CREDENTIALS = 'ssh_prod_instance' // Use the ID of the Jenkins stored SSH credentials
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // ดึงโค้ดจาก GitHub repository
+                git branch: 'jenkins', url: 'https://github.com/bbiiw/SeniorLink'
+            }
+        }
+
+        stage('Build Backend & Frontend Containers') {
+            steps {
+                sh 'docker-compose down'  // หยุดคอนเทนเนอร์ก่อนหน้า
+                sh 'docker-compose build' // Build คอนเทนเนอร์ใหม่
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // รันการทดสอบในคอนเทนเนอร์
+                sh 'docker-compose exec backend python manage.py test'
+                sh 'docker-compose exec frontend npm test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // SSH เข้าไปยัง remote host
+                sshagent(credentials: [SSH_CREDENTIALS]) {
+                    // คัดลอก Docker image ไปยัง remote server
+                    sh "ssh ${REMOTE_HOST} 'docker pull ${DOCKER_IMAGE}'"
+                    sh "ssh ${REMOTE_HOST} 'docker-compose down && docker-compose up -d'" // หยุดและเริ่มคอนเทนเนอร์ใหม่
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // หยุดคอนเทนเนอร์ทั้งหมดหลังการรัน
+            sh 'docker-compose down'
+        }
+    }
+}
