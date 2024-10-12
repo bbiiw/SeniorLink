@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaClock, FaCalendarAlt, FaMoneyBillWave } from "react-icons/fa"; // Added icon for salary
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -21,7 +21,7 @@ const JobDetail = ({ job }) => {
       console.log(response.data);
       setIsModalOpen(false);
     } catch (error) {
-      toast.error(error.response?.data?.message || "เกิดข้อผิดพลาดในการสมัครงาน");
+      toast.error(error.response?.data?.message || "กรุณาสร้างโปรไฟล์ก่อนทำการสมัครงาน");
     }
   };
 
@@ -42,20 +42,31 @@ const JobDetail = ({ job }) => {
         {/* Duration with clock icon */}
         <div className="text-md text-gray-500 mt-4 flex items-center">
           <FaClock className="mr-2" />
-          <span>ระยะเวลาฝึกงาน {job.duration}</span>
+          <span>ระยะเวลาทำงาน {job.duration}</span>
         </div>
         
         {/* Start and End Date with calendar icon */}
         <div className="text-md text-gray-500 mt-2 flex items-center">
           <FaCalendarAlt className="mr-2" />
-          <span>ฝึกงานตั้งแต่วันที่ {job.start_date} - {job.end_date}</span>
+          <span>เริ่ม {job.start_date} - สิ้นสุด {job.end_date}</span>
         </div>
         
-        <div className="flex items-center text-md mt-2">
-          <FaMapMarkerAlt className="text-gray-500 mr-1" />
-          <span className="text-gray-700">{job.location}</span>
+        {/* Salary */}
+        <div className="flex items-center text-md text-gray-500 mt-2">
+          <FaMoneyBillWave className="mr-2" />
+          <span>{job.salary.toLocaleString()} บาท/เดือน</span>
         </div>
-        <div className="flex space-x-4 mt-4">
+
+        {/* Location */}
+        <div className="flex items-center text-md mt-2 text-gray-500">
+          <FaMapMarkerAlt className="mr-2" />
+          <span>{job.location}</span>
+        </div>
+
+
+        {/* Skills */}
+        <p className="flex items-center text-lg font-semibold mt-4">ทักษะที่ต้องการ</p>
+        <div className="flex space-x-4 mt-2">
           {job.myskills.map((skill, index) => (
             <span key={index} className="badge badge-secondary">{skill.name}</span>
           ))}

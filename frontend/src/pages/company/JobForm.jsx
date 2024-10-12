@@ -16,6 +16,7 @@ const JobForm = () => {
     duration: null,
     start_date: '',
     end_date: '',
+    salary: '',
     job_category: null,
     skills: [],
     newSkill: null,
@@ -126,6 +127,7 @@ const JobForm = () => {
         duration: jobData.duration ? jobData.duration.label : null,
         start_date: jobData.start_date,
         end_date: jobData.end_date,
+        salary: jobData.salary,
         description: jobData.description,
         skills: jobData.skills.map(skill => skill.value),
       };
@@ -151,130 +153,152 @@ const JobForm = () => {
 
   return (
     <div className="mx-auto bg-base-200 min-h-screen">
-      <Navbar />
-      <div className="container mx-auto py-10 p-32">
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          {/* Header */}
-          <h1 className="text-2xl font-bold mb-6">{id ? 'แก้ไขตำแหน่งฝึกงาน' : 'ประกาศตำแหน่งฝึกงานใหม่'}</h1>
+  <Navbar />
+  <div className="container mx-auto py-10 p-32">
+    <div className="bg-white p-8 rounded-lg shadow-lg">
+      {/* Header */}
+      <h1 className="text-3xl font-bold mb-8">{id ? 'แก้ไขประกาศงาน' : 'ประกาศตำแหน่งงานใหม่'}</h1>
 
-          {/* Job Information Section */}
-          <div className="space-y-6">
-            {/* Job Information Form */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-              {/* Job Title */}
-              <div className="col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">ชื่อตำแหน่งงาน</label>
-                <input 
-                  type="text" 
-                  name="title"
-                  className="input input-bordered w-full rounded-lg"
-                  value={jobData.title}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* Job Location */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">สถานที่ฝึกงาน</label>
-                <input 
-                  type="text" 
-                  name="location"
-                  className="input input-bordered w-full rounded-lg"
-                  value={jobData.location}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* Job Category */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">ประเภทงาน</label>
-                <Select
-                  options={categoryOptions}
-                  value={jobData.job_category}
-                  onChange={handleCategoryChange}
-                  className="w-full"
-                  placeholder="ค้นหาประเภทงาน"
-                />
-              </div>
-
-              {/* Start Date */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">วันที่เริ่มฝึกงาน</label>
-                <input 
-                  type="date"
-                  name="start_date"
-                  className="input input-bordered w-full rounded-lg"
-                  value={jobData.start_date}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* End Date */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">วันที่จบฝึกงาน</label>
-                <input 
-                  type="date"
-                  name="end_date"
-                  className="input input-bordered w-full rounded-lg"
-                  value={jobData.end_date}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* Duration */}
-              <div className="col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">ระยะเวลาฝึกงาน</label>
-                <Select
-                  options={durationOptions}
-                  value={jobData.duration}
-                  onChange={handleDurationChange}
-                  className="w-full"
-                  placeholder="เลือกระยะเวลาฝึกงาน"
-                />
-              </div>
-
-              {/* Job Description */}
-              <div className="col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">รายละเอียดงาน</label>
-                <Editor
-                  apiKey="boo8d9alfaew4evkz831yoxwo57du15uk5j9v0vre1gi1hx1"
-                  value={jobData.description}
-                  onEditorChange={handleDescriptionChange}
-                />
-              </div>
-            </div>
-
-            {/* Skills Section */}
-            <div className="mt-6">
-              <h2 className="text-lg font-semibold">ทักษะที่ต้องการ</h2>
-              <div className="flex flex-wrap gap-2">
-                {jobData.skills.map((skill, index) => (
-                  <span key={index} className="badge badge-primary rounded-lg flex items-center">
-                    {skill.label} <button onClick={() => removeSkill(skill)} className="ml-1 font-medium">X</button>
-                  </span>
-                ))}
-              </div>
-              <div className="flex items-center mt-4 w-2/3">
-                <Select
-                  options={skillsOptions}
-                  value={jobData.newSkill}
-                  onChange={handleSkillChange}
-                  className="w-full"
-                  placeholder="ค้นหาทักษะที่ต้องการ"
-                />
-                <button className="btn btn-primary ml-5 rounded-lg" onClick={addSkill}>+ เพิ่มทักษะ</button>
-              </div>
-            </div>
-
-            {/* Buttons */}
-            <div className="flex justify-end space-x-4 mt-8">
-              <Link to="/company/job-list"><button className="btn btn-error rounded-lg">ยกเลิก</button></Link>
-              <button className="btn btn-primary rounded-lg" onClick={handleSave}>บันทึกและโพสต์</button>
-            </div>
+      {/* Job Information Section */}
+      <div className="space-y-8">
+        {/* Job Information Form */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Job Title */}
+          <div className="col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">ชื่อตำแหน่งงาน</label>
+            <input 
+              type="text" 
+              name="title"
+              className="input input-bordered w-full rounded-lg"
+              value={jobData.title}
+              onChange={handleInputChange}
+            />
           </div>
+
+          {/* Job Category */}
+          <div className="col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">ประเภทงาน</label>
+            <Select
+              options={categoryOptions}
+              value={jobData.job_category}
+              onChange={handleCategoryChange}
+              className="w-full"
+              placeholder="ค้นหาประเภทงาน"
+            />
+          </div>
+
+          {/* Job Location */}
+          <div className="col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">สถานที่ทำงาน</label>
+            <input 
+              type="text" 
+              name="location"
+              className="input input-bordered w-full rounded-lg"
+              value={jobData.location}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          {/* Duration */}
+          <div className="col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">ระยะเวลาการทำงาน</label>
+            <Select
+              options={durationOptions}
+              value={jobData.duration}
+              onChange={handleDurationChange}
+              className="w-full"
+              placeholder="เลือกระยะเวลาการทำงาน"
+            />
+          </div>
+
+          {/* Salary Input */}
+          <div className="col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">เงินเดือน (บาทต่อเดือน)</label>
+            <input 
+              type="number" 
+              name="salary" 
+              className="input input-bordered w-full rounded-lg" 
+              value={jobData.salary} 
+              onChange={handleInputChange} 
+              placeholder="ระบุเงินเดือน"
+            />
+          </div>
+
+          {/* Start Date */}
+          <div className="col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">วันที่เริ่มงาน</label>
+            <input 
+              type="date"
+              name="start_date"
+              className="input input-bordered w-full rounded-lg"
+              value={jobData.start_date}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          {/* End Date */}
+          <div className="col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">วันที่สิ้นสุดงาน</label>
+            <input 
+              type="date"
+              name="end_date"
+              className="input input-bordered w-full rounded-lg"
+              value={jobData.end_date}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          {/* Job Description */}
+          <div className="col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">รายละเอียดงาน</label>
+            <Editor
+              apiKey="boo8d9alfaew4evkz831yoxwo57du15uk5j9v0vre1gi1hx1"
+              value={jobData.description}
+              onEditorChange={handleDescriptionChange}
+              init={{
+                height: 300,
+                menubar: false,
+                plugins: 'link image code',
+                toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | code'
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Skills Section */}
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-4">ทักษะที่ต้องการ</h2>
+          <div className="flex flex-wrap gap-2">
+            {jobData.skills.map((skill, index) => (
+              <span key={index} className="badge badge-primary rounded-lg flex items-center">
+                {skill.label} <button onClick={() => removeSkill(skill)} className="ml-1 font-medium">X</button>
+              </span>
+            ))}
+          </div>
+          <div className="flex items-center mt-4 w-full mb-24">
+            <Select
+              options={skillsOptions}
+              value={jobData.newSkill}
+              onChange={handleSkillChange}
+              className="w-full max-w-sm"
+              placeholder="ค้นหาทักษะที่ต้องการ"
+            />
+            <button className="btn btn-primary ml-5 rounded-lg" onClick={addSkill}>+ เพิ่มทักษะ</button>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-end space-x-4 mt-8">
+          <Link to="/company/job-list">
+            <button className="btn btn-error rounded-lg">ยกเลิก</button>
+          </Link>
+          <button className="btn btn-primary rounded-lg" onClick={handleSave}>บันทึกและประกาศ</button>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 

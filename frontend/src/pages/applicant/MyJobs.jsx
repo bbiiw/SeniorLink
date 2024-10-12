@@ -55,9 +55,9 @@ const MyJobs = () => {
                         ? "badge-error"
                         : app.status.name === "ผ่านการคัดเลือก"
                         ? "badge-success"
-                        : app.status.name === "กำลังฝึกงาน"
+                        : app.status.name === "กำลังทำงาน"
                         ? "badge-secondary"
-                        : app.status.name === "ฝึกงานเสร็จสิ้น"
+                        : app.status.name === "ทำงานเสร็จสิ้น"
                         ? "badge-primary"
                         : "badge-warning"
                     } mt-2`}

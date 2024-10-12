@@ -75,9 +75,9 @@ const ApplicationManagement = () => {
                       ? 'badge-error'
                       : app.status.name === 'ผ่านการคัดเลือก'
                       ? 'badge-success'
-                      : app.status.name === 'กำลังฝึกงาน'
+                      : app.status.name === 'กำลังทำงาน'
                       ? 'badge-secondary'
-                      : app.status.name === 'ฝึกงานเสร็จสิ้น'
+                      : app.status.name === 'ทำงานเสร็จสิ้น'
                       ? 'badge-primary'
                       : 'badge-warning'
                       } mt-2`}
@@ -116,9 +116,9 @@ const ApplicationManagement = () => {
                   <>
                     <button
                       className="btn btn-primary btn-sm"
-                      onClick={() => handleStatusChange(app.id, 4)} // Status: รับเข้าการฝึกงาน
+                      onClick={() => handleStatusChange(app.id, 4)} // Status: กำลังทำงาน
                       >
-                      รับเข้าฝึกงาน
+                      รับเข้าทำงาน
                     </button>
                       <button
                       className="btn btn-error btn-sm"
@@ -129,16 +129,16 @@ const ApplicationManagement = () => {
                   </>
                 )}
 
-                {app.status.name === 'กำลังฝึกงาน' && (
+                {app.status.name === 'กำลังทำงาน' && (
                   <button
                   className="btn btn-success btn-sm"
-                  onClick={() => handleStatusChange(app.id, 5)} // Status: ฝึกงานเสร็จสิ้น
+                  onClick={() => handleStatusChange(app.id, 5)} // Status: ทำงานเสร็จสิ้น
                   >
-                    ฝึกงานเสร็จสิ้น
+                    ทำงานเสร็จสิ้น
                   </button>
                 )}
 
-                {(app.status.name === 'ถูกปฏิเสธ' || app.status.name === 'ฝึกงานเสร็จสิ้น') && (
+                {(app.status.name === 'ถูกปฏิเสธ' || app.status.name === 'ทำงานเสร็จสิ้น') && (
                   <button className="btn btn-error btn-sm" onClick={() => handleDelete(app.id)}>
                     <FaTrash className="mr-1" /> ลบใบสมัคร
                   </button>

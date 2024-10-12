@@ -28,6 +28,7 @@ const RegisterCompany = () => {
         }, 1000);
         console.log(response.data);
     } catch (error) {
+      console.log(error.response.data)
         toast.error(error.response.data.message || 'เกิดข้อผิดพลาดในการลงทะเบียน');
     }
   };

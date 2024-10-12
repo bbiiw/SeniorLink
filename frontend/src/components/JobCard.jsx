@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaClock, FaCalendarAlt, FaMoneyBillWave } from 'react-icons/fa'; // Added icon for salary
 
 const JobCard = ({ job, onClick }) => {
   return (
@@ -12,19 +12,19 @@ const JobCard = ({ job, onClick }) => {
         {/* Duration */}
         <div className="flex items-center text-gray-600">
           <FaClock className="mr-2" />
-          <span>ระยะเวลาฝึกงาน {job.duration}</span>
+          <span>ระยะเวลา {job.duration}</span>
         </div>
 
-        {/* Start and End Date */}
+        {/* Salary */}
         <div className="flex items-center text-gray-600">
-          <FaCalendarAlt className="mr-2" />
-          <span>{job.start_date} - {job.end_date}</span>
+          <FaMoneyBillWave className="mr-2" />
+          <span>{job.salary.toLocaleString()} บาท/เดือน</span>
         </div>
 
         {/* Location */}
-        <div className="flex items-center space-x-4 mt-2 text-gray-600">
+        <div className="flex items-center space-x-4 text-gray-600">
           <div className="flex items-center">
-            <FaMapMarkerAlt className="mr-1 h-4 w-4 flex-shrink-0" />
+            <FaMapMarkerAlt className="mr-2 h-4 w-4 flex-shrink-0" />
             <span>{job.location}</span>
           </div>
         </div>

@@ -112,7 +112,7 @@ const SearchJobs = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="ค้นหาตำแหน่งฝึกงาน"
+              placeholder="ค้นหาตำแหน่งงาน"
               className="input input-bordered w-96 pl-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

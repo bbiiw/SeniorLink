@@ -28,12 +28,12 @@ class JobPositionSerializer(serializers.ModelSerializer):
     # กำหนดรูปแบบวันที่เป็น dd/mm/yyyy
     start_date = serializers.DateField(format="%d/%m/%Y")
     end_date = serializers.DateField(format="%d/%m/%Y")
-    created_at = serializers.DateTimeField(format="%d/%m/%Y %H:%M")
+    created_at = serializers.DateTimeField(format="%d/%m/%Y %H:%M", read_only=True)
 
     class Meta:
         model = JobPosition
         fields = [
             'id', 'title', 'description', 'location', 'duration', 
-            'start_date', 'end_date', 'created_at', 'company', 
+            'salary', 'start_date', 'end_date', 'created_at', 'company', 
             'job_category', 'category', 'skills', 'myskills'
         ]

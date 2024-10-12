@@ -14,8 +14,8 @@ class JobPosition(models.Model):
     duration = models.CharField(max_length=50)
     start_date = models.DateField()
     end_date = models.DateField()
+    salary = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     job_category = models.ForeignKey(JobCategory, on_delete=models.CASCADE)
     skills = models.ManyToManyField(Skill)
-

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosMail } from "react-icons/io";
-import { FaMapMarkerAlt, FaPhoneAlt, FaArrowLeft } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhoneAlt, FaArrowLeft, FaCalendarAlt, FaClock } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../../components/Navbar';
@@ -82,7 +82,7 @@ const ProfileCompany = () => {
 
                   {/* Address */}
                   <div className="flex items-center space-x-2 max-w-lg">
-                    <FaMapMarkerAlt className="w-6 h-6" />
+                    <FaMapMarkerAlt className="w-5 h-5" />
                     <span>{profile.address}</span>
                   </div>
 
@@ -114,9 +114,19 @@ const ProfileCompany = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-lg font-semibold">{job.title}</h3>
-                        <p className="text-gray-600">{job.duration} | {job.start_date} - {job.end_date}</p>
+                        
                         <div className="flex items-center space-x-2 text-gray-600">
-                          <FaMapMarkerAlt className="text-gray-500" />
+                          <FaClock />
+                          <span>ระยะเวลา {job.duration}</span>
+                        </div>
+
+                        <div className="flex items-center space-x-2 text-gray-600">
+                          <FaCalendarAlt />
+                          <span>{job.start_date} - {job.end_date}</span>
+                        </div>
+
+                        <div className="flex items-center space-x-2 text-gray-600">
+                          <FaMapMarkerAlt />
                           <span>{job.location}</span>
                         </div>
                       </div>
