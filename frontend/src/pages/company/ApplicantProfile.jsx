@@ -48,13 +48,13 @@ const ApplicantProfile = () => {
               </div>
             </div>
 
-              {/* BirthDate Address Section */}
-              <div className="bg-white p-6 rounded-lg shadow">
-                <h3 className="text-lg font-semibold">วันเกิด</h3>
-                <p>{applicantProfile.birth_date}</p>
-                <h3 className="text-lg font-semibold mt-4">ที่อยู่</h3>
-                <p>{applicantProfile.address}</p>
-              </div>
+            {/* BirthDate Address Section */}
+            <div className="bg-white p-6 rounded-lg shadow">
+              <h3 className="text-lg font-semibold">วันเกิด</h3>
+              <p>{applicantProfile.birth_date} <br/><b>อายุ</b> {applicantProfile.age} ปี</p>
+              <h3 className="text-lg font-semibold mt-4">ที่อยู่</h3>
+              <p>{applicantProfile.address}</p>
+            </div>
 
             {/* Contact Section */}
             <div className="bg-white p-6 rounded-lg shadow">
@@ -78,24 +78,27 @@ const ApplicantProfile = () => {
               <div 
                 className="text-md mt-2" 
                 dangerouslySetInnerHTML={{ __html: applicantProfile.description } || 'ยังไม่มีข้อมูล'} 
-                />
+              />
             </div>
 
-            {/* Education Section */}
+            {/* Work Experience Section */}
             <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-lg font-semibold mb-4">การศึกษา</h3>
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center mr-4">
-                  <span className="text-pink-600">🎓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold">{applicantProfile.education?.name}</h4>
-                  <p><b>คณะ</b> {applicantProfile.education?.faculty} <b>สาขา</b> {applicantProfile.education?.major}</p>
-                  <p>{applicantProfile.education?.start_year} - {applicantProfile.education?.end_year !== 0 ? applicantProfile.education?.end_year : "ปัจจุบัน"}</p>
-                </div>
-              </div>
+              <h3 className="text-lg font-semibold mb-4">ประวัติการทำงาน</h3>
+              <div 
+                className="text-md mt-2" 
+                dangerouslySetInnerHTML={{ __html: applicantProfile.work_experience } || 'ยังไม่มีข้อมูลประวัติการทำงาน'} 
+              />
             </div>
 
+
+            {/* Health Information Section */}
+            <div className="bg-white p-6 rounded-lg shadow">
+              <h3 className="text-lg font-semibold mb-4">ข้อมูลสุขภาพ</h3>
+              <p>{applicantProfile.health_info || 'ยังไม่มีข้อมูลสุขภาพ'}</p>
+              <h3 className="text-lg font-semibold mt-4">ข้อจำกัดในการทำงาน</h3>
+              <p>{applicantProfile.work_restrictions || 'ยังไม่มีข้อมูลข้อจำกัดในการทำงาน'}</p>
+            </div>
+            
             {/* Skills Section */}
             <div className="bg-white p-6 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-4">ทักษะ</h3>
@@ -105,6 +108,7 @@ const ApplicantProfile = () => {
                 ))}
               </ul>
             </div>
+
           </div>
         </div>
       </div>

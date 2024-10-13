@@ -43,11 +43,11 @@ const ProfilePage = () => {
               {/* Profile Section */}
               <div className="bg-white p-6 rounded-lg shadow">
                 <div className="flex flex-col items-center">
-                <img
-                  src={profile.profile_picture ? `http://localhost:8000${profile.profile_picture}` : "https://via.placeholder.com/150"}
-                  alt="Profile"
-                  className="w-32 h-32 rounded-full mb-4 object-cover"
-                />
+                  <img
+                    src={profile.profile_picture ? `http://localhost:8000${profile.profile_picture}` : "https://via.placeholder.com/150"}
+                    alt="Profile"
+                    className="w-32 h-32 rounded-full mb-4 object-cover"
+                  />
                   <h2 className="text-xl font-semibold">{profile.first_name} {profile.last_name}</h2>
                   <Link to="/applicant/edit">
                     <button className="btn btn-primary mt-4"><FaEdit /> แก้ไขโปรไฟล์</button>
@@ -58,7 +58,7 @@ const ProfilePage = () => {
               {/* BirthDate Address Section */}
               <div className="bg-white p-6 rounded-lg shadow">
                 <h3 className="text-lg font-semibold">วันเกิด</h3>
-                <p>{profile.birth_date}</p>
+                <p><b>เกิดวันที่</b> {profile.birth_date} <br/><b>อายุ</b> {profile.age} ปี</p>
                 <h3 className="text-lg font-semibold mt-4">ที่อยู่</h3>
                 <p>{profile.address}</p>
               </div>
@@ -87,20 +87,22 @@ const ProfilePage = () => {
                   dangerouslySetInnerHTML={{ __html: profile.description } || 'ยังไม่มีข้อมูล'} 
                 />
               </div>
-
-              {/* Education Section */}
+              
+              {/* Work History Section */}
               <div className="bg-white p-6 rounded-lg shadow">
-                <h3 className="text-lg font-semibold mb-4">การศึกษา</h3>
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center mr-4">
-                    <span className="text-pink-600">🎓</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">{profile.education.name}</h4>
-                    <p><b>คณะ</b> {profile.education.faculty} <b>สาขา</b> {profile.education.major}</p>
-                    <p>{profile.education.start_year} - {profile.education.end_year !== 0 ? profile.education.end_year : "ปัจจุบัน"}</p>
-                  </div>
-                </div>
+                <h3 className="text-lg font-semibold mb-4">ประวัติการทำงาน</h3>
+                <div 
+                  className="text-md mt-2" 
+                  dangerouslySetInnerHTML={{ __html: profile.work_experience } || 'ยังไม่มีข้อมูล'} 
+                />
+              </div>
+
+              {/* Health Information Section */}
+              <div className="bg-white p-6 rounded-lg shadow">
+                <h3 className="text-lg font-semibold mb-4">ข้อมูลสุขภาพ</h3>
+                <p>{profile.health_info || 'ยังไม่มีข้อมูลสุขภาพ'}</p>
+                <h3 className="text-lg font-semibold mt-4">ข้อจำกัดในการทำงาน</h3>
+                <p>{profile.work_restrictions || 'ยังไม่มีข้อจำกัดในการทำงาน'}</p>
               </div>
 
               {/* Skills Section */}
@@ -112,6 +114,7 @@ const ProfilePage = () => {
                   })}
                 </ul>
               </div>
+
             </div>
           </div>
         )}

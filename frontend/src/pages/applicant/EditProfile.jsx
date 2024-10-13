@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import GeneralInformation from '../../components/GeneralInformation';
 import About from '../../components/About';
 import Skills from '../../components/Skills';
-import Education from '../../components/Education';
 import Navbar from "../../components/Navbar";
+import Health from '../../components/Health';
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -20,15 +20,11 @@ const EditProfile = () => {
     phone_number: '',
     address: '',
     description: '',
+    work_experience: '',
+    health_info: '',
+    work_restrictions: '',
     profile_picture: null,
-    skills: [],
-    education: {
-      name: '',
-      faculty: '',
-      major: '',
-      start_year: '',
-      end_year: ''
-    }
+    skills: []
   });
 
   // ดึงข้อมูลโปรไฟล์เมื่อหน้าโหลดขึ้น
@@ -62,6 +58,9 @@ const EditProfile = () => {
       formData.append('phone_number', profileData.phone_number);
       formData.append('address', profileData.address);
       formData.append('description', profileData.description);
+      formData.append('work_experience', profileData.work_experience);
+      formData.append('health_info', profileData.health_info);
+      formData.append('work_restrictions', profileData.work_restrictions);
 
       if (profileData.profile_picture instanceof File) {
           formData.append('profile_picture', profileData.profile_picture);
@@ -71,12 +70,6 @@ const EditProfile = () => {
       skillsData.forEach(skillId => {
           formData.append('skills', skillId);
       });
-
-      formData.append('education.name', profileData.education.name);
-      formData.append('education.faculty', profileData.education.faculty);
-      formData.append('education.major', profileData.education.major);
-      formData.append('education.start_year', profileData.education.start_year);
-      formData.append('education.end_year', profileData.education.end_year !== null ? profileData.education.end_year : 0);
       
       let response;
       if (isEditMode) {
@@ -112,7 +105,7 @@ const EditProfile = () => {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">{isEditMode ? 'แก้ไขโปรไฟล์' : 'สร้างโปรไฟล์'}</h1>
           <div>
-            <button className="btn btn-error mr-2" onClick={cancelEdit}>ยกเลิก</button>
+            <button className="btn btn-error mr-2" onClick={() => navigate('/applicant/profile')}>ยกเลิก</button>
             <button className="btn btn-primary" onClick={saveProfile}>บันทึก</button>
           </div>
         </div>
@@ -123,32 +116,29 @@ const EditProfile = () => {
             <ul className="menu">
               <li className="my-2 hover:bg-secondary rounded"><a href="#general-info">ข้อมูลส่วนตัว</a></li>
               <li className="my-2 hover:bg-secondary rounded"><a href="#about">เกี่ยวกับฉัน</a></li>
+              <li className="my-2 hover:bg-secondary rounded"><a href="#health-info">ข้อมูลสุขภาพ</a></li>
               <li className="my-2 hover:bg-secondary rounded"><a href="#skills">ทักษะ</a></li>
-              <li className="my-2 hover:bg-secondary rounded"><a href="#education">การศึกษา</a></li>
             </ul>
           </div>
 
           {/* Main Content */}
           <div className="w-3/4">
-            {/* ข้อมูลส่วนตัว */}
             <div id="general-info">
               <GeneralInformation profileData={profileData} setProfileData={setProfileData} />
             </div>
-            
-            {/* เกี่ยวกับฉัน */}
+
             <div id="about">
               <About profileData={profileData} setProfileData={setProfileData} />
             </div>
 
-            {/* ทักษะ */}
+            <div id="health-info">
+              <Health profileData={profileData} setProfileData={setProfileData} />
+            </div>
+            
             <div id="skills">
               <Skills profileData={profileData} setProfileData={setProfileData} />
             </div>
-            
-            {/* การศึกษา */}
-            <div id="education">
-              <Education profileData={profileData} setProfileData={setProfileData} />
-            </div>
+
           </div>
         </div>
       </div>

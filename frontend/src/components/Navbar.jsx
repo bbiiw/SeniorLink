@@ -49,7 +49,7 @@ const Navbar = () => {
       <div className="flex-1">
         <Link className="btn btn-ghost normal-case text-xl text-white" to="/">
           <img src="/logo.png" alt="LOGO" className="ml-5 h-12" />
-          <h1 className="text-2xl">InternLink</h1>
+          <h1 className="text-2xl">SeniorLink</h1>
         </Link>
       </div>
 

@@ -70,7 +70,7 @@ const Skills = ({ profileData, setProfileData }) => {
               </div>
             </div>
           ))}
-          <button className="btn btn-primary" onClick={addSkill}>+ เพิ่มทักษะ</button>
+          <button className="btn btn-primary mb-32" onClick={addSkill}>+ เพิ่มทักษะ</button>
         </div>
       )}
     </div>

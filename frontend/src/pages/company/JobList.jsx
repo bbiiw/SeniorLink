@@ -43,7 +43,7 @@ const JobList = () => {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-green-600">รายการประกาศงาน</h1>
           {/* Add Job Button */}
-          <Link to="/company/job-form" className="btn btn-primary">+ ประกาศตำแหน่งฝึกงานใหม่</Link>
+          <Link to="/company/job-form" className="btn btn-primary">+ ประกาศตำแหน่งงานใหม่</Link>
         </div>
 
         {/* Job List */}
