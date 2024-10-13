@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('03_Jenkins/week13/03_Github_webhook') {  // Adjust this path
+                dir('') {  // Adjust this path
                     sh '''
                     if [ ! -f Dockerfile ]; then
                         echo "Dockerfile not found!"
