@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('') {  // Adjust this path
+                dir('./') {  // Adjust this path
                     sh '''
                     if [ ! -f Dockerfile ]; then
                         echo "Dockerfile not found!"
