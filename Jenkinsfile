@@ -48,10 +48,8 @@ pipeline {
 
     post {
         always {
-            node {
                 // ทำการ logout ออกจาก Docker ภายใน node ที่มีการกำหนด workspace
                 sh 'docker logout'
-            }
         }
     }
 }
