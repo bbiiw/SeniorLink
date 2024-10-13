@@ -20,13 +20,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('/') {  // Adjust this path if necessary
-                    sh '''
-                    if [ ! -f dockerfile ]; then  // Check for lowercase 'dockerfile'
-                        echo "Dockerfile not found!"
-                        exit 1
-                    fi
-                    docker build -t $DOCKER_IMAGE -f dockerfile .  // Specify the Dockerfile explicitly
-                    '''
+                    sh 'echo "Running in $(pwd)"'
+                       sh 'echo start build the Docker image = $DOCKER_IMAGE'
+                       sh 'docker build -t $DOCKER_IMAGE .'
+                    }   
                 }
             }
         }
