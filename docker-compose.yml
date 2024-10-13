@@ -25,7 +25,7 @@ services:
     image: postgres
     container_name: db
     environment:
-      POSTGRES_DB: intern_db
+      POSTGRES_DB: senior_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
