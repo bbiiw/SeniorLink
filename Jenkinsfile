@@ -16,8 +16,8 @@ pipeline {
         stage('Build and Start with Docker Compose') {
             steps {
                 script {
-                    // ใช้ Docker Compose Plugin แทนคำสั่ง sh docker-compose
-                    dockerCompose up: '--build -d'
+                    // ใช้คำสั่ง docker-compose ผ่าน sh
+                    sh 'docker-compose -f docker-compose.yml up --build -d'
                 }
             }
         }
@@ -25,7 +25,7 @@ pipeline {
         stage('Test Backend') {
             steps {
                 script {
-                    // ทดสอบ backend เช่นเช็คสุขภาพระบบ
+                    // ทดสอบ backend เช่นตรวจสอบ API endpoint
                     sh 'curl http://localhost:8080/api/healthcheck'
                 }
             }
@@ -35,8 +35,8 @@ pipeline {
     post {
         always {
             script {
-                // ใช้ Docker Compose Plugin เพื่อหยุด services
-                dockerCompose down: '--volumes'
+                // หยุดและลบ services โดยใช้ docker-compose ผ่าน sh
+                sh 'docker-compose -f docker-compose.yml down'
             }
         }
     }
