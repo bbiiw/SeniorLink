@@ -25,8 +25,8 @@ pipeline {
         stage('Test Backend') {
             steps {
                 script {
-                    // ทดสอบ backend เช่นตรวจสอบ API endpoint
-                    sh 'curl http://localhost:8080/api/healthcheck'
+                    // ทดสอบ backend โดยการเรียก API ผ่าน IP จริง
+                    sh 'curl http://35.240.166.181:8000/api/healthcheck'
                 }
             }
         }
