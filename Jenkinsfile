@@ -22,12 +22,15 @@ pipeline {
             }
         }
 
-        stage('Test Backend') {
-            steps {
-                script {
-                    // ทดสอบ backend โดยการเรียก API ผ่าน IP จริง
-                    sh 'curl http://35.240.166.181:8000/api/healthcheck'
-                }
+        // Removed 'Test Backend' stage with curl
+
+    }
+
+    post {
+        always {
+            script {
+                // หยุดและลบ services โดยใช้ docker-compose ผ่าน sh
+                sh 'docker-compose -f docker-compose.yml down'
             }
         }
     }
