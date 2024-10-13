@@ -16,14 +16,9 @@ class Applicant(models.Model):
     phone_number = models.CharField(max_length=15)
     address = models.TextField()
     description = models.TextField()
+    work_experience = models.TextField(null=True, blank=True)
+    health_info = models.TextField(null=True, blank=True)
+    work_restrictions = models.TextField(null=True, blank=True)
     profile_picture = models.ImageField(upload_to='profile/', null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     skills = models.ManyToManyField(Skill, blank=True)
-
-class Education(models.Model):
-    name = models.CharField(max_length=100)
-    faculty = models.CharField(max_length=100)
-    major = models.CharField(max_length=100)
-    start_year = models.IntegerField(default=0, blank=True)
-    end_year = models.IntegerField(default=0, blank=True)
-    applicant = models.OneToOneField(Applicant, on_delete=models.CASCADE)
