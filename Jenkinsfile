@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE       = 'earth123456798/seniorfrontend:latest'
+        DOCKER_IMAGE       = 'earth123456789/seniorfrontend:latest'
         DOCKER_CREDENTIALS = credentials('docker')
     }
 
