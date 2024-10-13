@@ -33,8 +33,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker pull $DOCKER_IMAGE'
-                    sh 'docker run -d --name taf -p 8087:3000 $DOCKER_IMAGE'
+                    // ตรวจสอบว่ามี container ที่ชื่อ taf รันอยู่หรือไม่ และหยุดหรือลบทิ้งก่อน
+                    sh '''
+                    if [ $(docker ps -q -f name=taf) ]; then
+                        docker stop taf
+                        docker rm taf
+                    fi
+                    docker pull $DOCKER_IMAGE
+                    docker run -d --name taf -p 8087:3000 $DOCKER_IMAGE
+                    '''
                 }
             }
         }
