@@ -3,7 +3,7 @@ version: '3'
 services:
   backend:
     build:
-      context: ./  # เส้นทางไปยัง Django backend
+      context: .  # เส้นทางไปยัง Django backend
       dockerfile: dockerfile  # ชื่อไฟล์ Dockerfile
     container_name: backend
     volumes:
