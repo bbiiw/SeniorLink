@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE       = 'earth123456789/seniorfrontend:latest'
-        DOCKER_CREDENTIALS = credentials('docker')
+        DOCKER_CREDENTIALS = credentials('dockerhub')
     }
 
     stages {
