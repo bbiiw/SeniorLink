@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE    = 'earth123456789/SeniorLink' // Docker image name
         REMOTE_HOST     = 'cherwerchai@35.240.166.181' // Replace with your actual username and remote IP
-        SSH_CREDENTIALS = 'ssh_prod_instance' // Use the ID of the Jenkins stored SSH credentials
+        SSH_CREDENTIALS = 'ssh-prod_instance' // Use the ID of the Jenkins stored SSH credentials
     }
 
     stages {
