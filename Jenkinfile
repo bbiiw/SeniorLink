@@ -19,13 +19,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('./') {  // Adjust this path
+                dir('/') {  // Adjust this path if necessary
                     sh '''
-                    if [ ! -f Dockerfile ]; then
+                    if [ ! -f dockerfile ]; then  // Check for lowercase 'dockerfile'
                         echo "Dockerfile not found!"
                         exit 1
                     fi
-                    docker build -t earth123456789/fastapi-webhook:latest .
+                    docker build -t $DOCKER_IMAGE -f dockerfile .  // Specify the Dockerfile explicitly
                     '''
                 }
             }
