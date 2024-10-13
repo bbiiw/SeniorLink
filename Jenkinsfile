@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE       = 'earth123456789/seniorbackend:latest'
+        DOCKER_IMAGE       = 'earth123456789/thinkaboutbackend:latest'
         DOCKER_CREDENTIALS = credentials('dockerhub')
     }
 
@@ -16,8 +16,8 @@ pipeline {
         stage('Build and Start with Docker Compose') {
             steps {
                 script {
-                    // Build และ start services โดยใช้ docker-compose
-                    sh 'docker-compose -f docker-compose.yml up --build -d'
+                    // ใช้ Docker Compose Plugin แทนคำสั่ง sh docker-compose
+                    dockerCompose up: '--build -d'
                 }
             }
         }
@@ -35,8 +35,8 @@ pipeline {
     post {
         always {
             script {
-                // หยุดและลบ services ของ docker-compose
-                sh 'docker-compose -f docker-compose.yml down'
+                // ใช้ Docker Compose Plugin เพื่อหยุด services
+                dockerCompose down: '--volumes'
             }
         }
     }
