@@ -14,6 +14,12 @@ services:
       - .env  # ตรวจสอบว่าไฟล์ .env มีอยู่ในตำแหน่งที่ถูกต้อง
     depends_on:
       - db
+    command: >
+      bash -c "
+      python manage.py makemigrations &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000
+      "
 
   db:
     image: postgres
