@@ -48,9 +48,13 @@ pipeline {
 
     post {
         always {
-            // ใช้ node พร้อม label เพื่อให้มี workspace ที่ถูกต้องสำหรับรันคำสั่ง shell
-            node('any') {
-                sh 'docker logout || true'
+            // ไม่ต้องใช้ node ในการ logout
+            script {
+                try {
+                    sh 'docker logout || true'
+                } catch (Exception e) {
+                    echo "Docker logout failed: ${e}"
+                }
             }
         }
     }
