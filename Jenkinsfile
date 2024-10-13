@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE       = 'earth123456789/thinkaboutbackend:latest'
+        DOCKER_IMAGE       = 'earth123456789/seniorbackend:latest'
         DOCKER_CREDENTIALS = credentials('dockerhub')
     }
 
