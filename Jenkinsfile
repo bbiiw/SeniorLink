@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
+                // ดึงโค้ดจาก GitHub
                 git url: 'https://github.com/bbiiw/SeniorLink.git', branch: 'frontend'
             }
         }
@@ -16,6 +17,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    // สร้าง Docker Image โดยใช้ Dockerfile
                     sh 'docker build -t $DOCKER_IMAGE .'
                 }
             }
@@ -24,6 +26,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
+                    // Login เข้า Docker Hub และ push image
                     sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
                     sh 'docker push $DOCKER_IMAGE'
                 }
@@ -33,14 +36,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // ตรวจสอบว่ามี container ที่ชื่อ taf รันอยู่หรือไม่ และหยุดหรือลบทิ้งก่อน
+                    // หยุดและลบ container ที่มีอยู่ก่อนที่จะรัน container ใหม่
                     sh '''
                     if [ $(docker ps -q -f name=taf) ]; then
                         docker stop taf
                         docker rm taf
                     fi
                     docker pull $DOCKER_IMAGE
-                    docker run -d --name taf -p 8087:3000 $DOCKER_IMAGE
+                    docker run -d --name taf -p 5173:5173 $DOCKER_IMAGE
                     '''
                 }
             }
@@ -49,7 +52,10 @@ pipeline {
 
     post {
         always {
-            sh 'docker logout'
+            // logout ออกจาก Docker
+            script {
+                sh 'docker logout || true'
+            }
         }
     }
 }
