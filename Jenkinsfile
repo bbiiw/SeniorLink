@@ -7,24 +7,21 @@ pipeline {
     }
 
     stages {
-        stage('Start Jenkins') {
+        stage('Checkout Code') {
             steps {
-                sh 'echo Start Jenkins............'
-                sh 'echo docker : user = $DOCKER_CREDENTIALS_USR : password = $DOCKER_CREDENTIALS_PSW'
+                git url: 'https://github.com/bbiiw/SeniorLink.git', branch: 'frontend'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                dir('./') {
-                    sh 'echo "Running in $(pwd)"'
-                    sh 'echo start build the Docker image = $DOCKER_IMAGE'
+                script {
                     sh 'docker build -t $DOCKER_IMAGE .'
                 }
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Push Docker Image') {
             steps {
                 script {
                     sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
@@ -45,8 +42,9 @@ pipeline {
 
     post {
         always {
-            // Execute without node
-            sh 'docker logout'
+            node {
+                sh 'docker logout'
+            }
         }
     }
 }
