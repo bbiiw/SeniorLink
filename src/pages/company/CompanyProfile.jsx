@@ -68,7 +68,7 @@ const CompanyProfile = () => {
 
                   {/* Address */}
                   <div className="flex items-center space-x-2 max-w-lg">
-                    <FaMapMarkerAlt className="w-6 h-6" />
+                    <FaMapMarkerAlt className="w-5 h-5" />
                     <span>{profile.address}</span>
                   </div>
 

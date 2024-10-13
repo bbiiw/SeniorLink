@@ -23,7 +23,7 @@ import CompanyProfile from './pages/company/CompanyProfile';
 import CompanyInfo from './pages/company/CompanyInfo';
 import JobList from './pages/company/JobList';
 import JobForm from './pages/company/JobForm';
-import ApplicationManagement from './pages/Company/ApplicationManagement';
+import ApplicationManagement from './pages/company/ApplicationManagement';
 import Unauthorized from './pages/Unauthorized';
 import ApplicantProfile from './pages/company/ApplicantProfile';
 
