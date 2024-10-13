@@ -49,11 +49,8 @@ pipeline {
 
     post {
         always {
-            // Use a node block to ensure the correct context is available for shell commands
-            node {
-                // Logout from Docker Hub
-                sh 'docker logout'
-            }
+            // Logout from Docker Hub
+            sh 'docker logout'
         }
     }
 }
