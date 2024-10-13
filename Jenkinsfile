@@ -31,13 +31,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            script {
-                // หยุดและลบ services โดยใช้ docker-compose ผ่าน sh
-                sh 'docker-compose -f docker-compose.yml down'
-            }
-        }
-    }
 }
