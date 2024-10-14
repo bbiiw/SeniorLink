@@ -77,11 +77,8 @@ pipeline {
 
     post {
         always {
-            script {
-                // Clean up Docker containers
-                echo 'Cleaning up containers...'
-                sh 'docker-compose -f docker-compose.yml down'
-            }
+            // Logout from Docker Hub
+            sh 'docker logout'
         }
     }
 }
