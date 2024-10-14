@@ -39,7 +39,7 @@ const SearchJobs = () => {
   useEffect(() => {
     const fetchJobCategories = async () => {
       try {
-        const response = await axios.get('http://34.87.118.33:8000/job_category/');
+        const response = await axios.get('http://34.87.118.33:80/job_category/');
         const options = response.data.map(category => ({
           value: category.id,
           label: `${category.category_name} (${category.job_count})`,
@@ -61,7 +61,7 @@ const SearchJobs = () => {
         job_category: selectedCategory ? selectedCategory.value : null,
       };
 
-      const response = await axios.get('http://34.87.118.33:8000/positions/', { params });
+      const response = await axios.get('http://34.87.118.33:80/positions/', { params });
 
       const filteredJobs = response.data.filter(job => {
         const matchesCategory = selectedCategory ? job.job_category === selectedCategory.value : true;
