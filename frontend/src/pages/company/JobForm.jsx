@@ -252,7 +252,7 @@ const JobForm = () => {
           <div className="col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-2">รายละเอียดงาน</label>
             <Editor
-              apiKey="boo8d9alfaew4evkz831yoxwo57du15uk5j9v0vre1gi1hx1"
+              apiKey="f498n2dlpaev0zti7z8j69a29uc968a8ddk80e9cu47q6vfx"
               value={jobData.description}
               onEditorChange={handleDescriptionChange}
               init={{

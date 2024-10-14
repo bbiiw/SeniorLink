@@ -225,7 +225,7 @@ const CompanyInfo = () => {
             <div className="col-span-2">
               <label className="block text-sm font-medium mb-2">เกี่ยวกับบริษัท</label>
               <Editor
-                apiKey="boo8d9alfaew4evkz831yoxwo57du15uk5j9v0vre1gi1hx1"
+                apiKey="f498n2dlpaev0zti7z8j69a29uc968a8ddk80e9cu47q6vfx"
                 value={companyData.description}
                 onEditorChange={handleDescriptionChange}
               />

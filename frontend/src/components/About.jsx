@@ -27,7 +27,7 @@ const About = ({ profileData, setProfileData }) => {
           {/* About Me */}
           <label className="block text-lg font-medium text-gray-700 mb-1">รายละเอียด</label>
           <Editor
-            apiKey="boo8d9alfaew4evkz831yoxwo57du15uk5j9v0vre1gi1hx1"
+            apiKey="f498n2dlpaev0zti7z8j69a29uc968a8ddk80e9cu47q6vfx"
             value={profileData.description}
             onEditorChange={handleDescriptionChange}
           />
@@ -36,7 +36,7 @@ const About = ({ profileData, setProfileData }) => {
           <div className="mt-6">
             <label className="block text-lg font-medium text-gray-700 mt-12 mb-1">ประวัติการทำงาน</label>
             <Editor
-            apiKey="boo8d9alfaew4evkz831yoxwo57du15uk5j9v0vre1gi1hx1"
+            apiKey="f498n2dlpaev0zti7z8j69a29uc968a8ddk80e9cu47q6vfx"
             value={profileData.work_experience}
             onEditorChange={handleWorkExperienceChange}
           />
