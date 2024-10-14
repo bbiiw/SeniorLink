@@ -5,6 +5,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const JobDetail = ({ job }) => {
+
+  if (!job || !job.company) {
+    return <p>กำลังโหลดข้อมูล...</p>;
+  }
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Handle applying for a job
@@ -29,8 +34,8 @@ const JobDetail = ({ job }) => {
     <div className="card bg-white shadow-md p-6">
       <div className="relative">
         <img
-          src={job.company.background_image 
-            ? `http://34.87.118.33:8000${job.company.background_image}` 
+          src={job.company && job.company.background_image
+            ? `http://34.87.118.33:8000${job.company.background_image}`
             : "https://via.placeholder.com/1000x200"}
           alt="company building"
           className="rounded-md mb-4 h-40 w-full object-cover"
@@ -38,19 +43,19 @@ const JobDetail = ({ job }) => {
       </div>
       <div className="mb-4">
         <h2 className="font-bold text-2xl mt-4">{job.title}</h2>
-        
+
         {/* Duration with clock icon */}
         <div className="text-md text-gray-500 mt-4 flex items-center">
           <FaClock className="mr-2" />
           <span>ระยะเวลาทำงาน {job.duration}</span>
         </div>
-        
+
         {/* Start and End Date with calendar icon */}
         <div className="text-md text-gray-500 mt-2 flex items-center">
           <FaCalendarAlt className="mr-2" />
           <span>เริ่ม {job.start_date} - สิ้นสุด {job.end_date}</span>
         </div>
-        
+
         {/* Salary */}
         <div className="flex items-center text-md text-gray-500 mt-2">
           <FaMoneyBillWave className="mr-2" />
@@ -75,9 +80,9 @@ const JobDetail = ({ job }) => {
 
       <div className="mb-6">
         <h3 className="font-bold text-lg">รายละเอียดงาน</h3>
-        <div 
-          className="text-md mt-2" 
-          dangerouslySetInnerHTML={{ __html: job.description }} 
+        <div
+          className="text-md mt-2"
+          dangerouslySetInnerHTML={{ __html: job.description }}
         />
       </div>
 
