@@ -17,7 +17,7 @@ pipeline {
                 script {
                     // Checkout source code from repository
                     echo 'Checking out code...'
-                    git url: 'https://github.com/bbiiw/SeniorLink.git', branch: 'dev'
+                    git url: 'https://github.com/bbiiw/SeniorLink.git', branch: 'main'
                 }
             }
         }
