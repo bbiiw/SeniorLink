@@ -1,33 +1,40 @@
 version: '3'
 
 services:
+
+################################################################# BACKEND ##################################################################################################
+
   backend:
     build:
-      context: ./backend  # เส้นทางไปยังโฟลเดอร์ backend
-      dockerfile: Dockerfile  # ชื่อไฟล์ Dockerfile
+      context: ./backend  # backend
+      dockerfile: Dockerfile  # Dockerfile
     container_name: backend
     volumes:
-      - ./backend:/code  # ใช้ในการพัฒนาเพื่อแมพไฟล์โค้ด
+      - ./backend:/code  # สร้าง volumes
     ports:
-      - "8000:8000"  # Django API จะเข้าถึงได้ที่พอร์ต 8000
+      - "8000:8000"  # Django API จะเข้าถึงได้ที่พอร์ต 8000 (Map port)
     env_file:
-      - ./backend/.env  # ตรวจสอบว่าไฟล์ .env มีอยู่ในตำแหน่งที่ถูกต้อง
+      - ./backend/.env  # ดูไฟล์ .env เพื่อเช็คสภาพแวดล้อม
     networks:
       - mynetwork
     depends_on:
       - db
 
+################################################################# FRONTEND #################################################################################################
+
   frontend:
     build:
-      context: ./frontend  # เส้นทางไปยังโฟลเดอร์ frontend
-      dockerfile: Dockerfile  # ชื่อไฟล์ Dockerfile
+      context: ./frontend  # frontend
+      dockerfile: Dockerfile  # Dockerfile
     container_name: frontend
     ports:
-      - "5173:5173"  # React frontend จะเข้าถึงได้ที่พอร์ต 3000
+      - "5173:5173"  # React frontend จะเข้าถึงได้ที่พอร์ต 5173 (Map port)
     networks:
-      - mynetwork
+      - mynetwork # ใช้ตรงนี้
     depends_on:
       - backend
+
+################################################################# DATABASE ##################################################################################################
 
   db:
     image: postgres
@@ -57,10 +64,13 @@ services:
     volumes:
       - pgadmin_data:/var/lib/pgadmin
 
-networks:
-  mynetwork:  # ใช้ network เดียวกัน
-    driver: bridge
 
+################################################################# Networks ##################################################################################################
+networks:
+  mynetwork:  # ชื่อ network
+    driver: bridge # Bridge network = ใช้ ชื่อ container สื่อสารแทน IP Address
+
+################################################################# Volumes ##################################################################################################
 volumes:
   postgres_data:
   pgadmin_data:
