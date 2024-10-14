@@ -4,7 +4,7 @@ services:
   backend:
     build:
       context: ./backend  # เส้นทางไปยังโฟลเดอร์ backend
-      dockerfile: Dockerfile  # ชื่อไฟล์ Dockerfile
+      dockerfile: dockerfile  # ชื่อไฟล์ Dockerfile
     container_name: backend
     volumes:
       - ./backend:/code  # ใช้ในการพัฒนาเพื่อแมพไฟล์โค้ด
@@ -20,7 +20,7 @@ services:
   frontend:
     build:
       context: ./frontend  # เส้นทางไปยังโฟลเดอร์ frontend
-      dockerfile: Dockerfile  # ชื่อไฟล์ Dockerfile
+      dockerfile: dockerfile  # ชื่อไฟล์ Dockerfile
     container_name: frontend
     ports:
       - "5173:5173"  # React frontend จะเข้าถึงได้ที่พอร์ต 3000
