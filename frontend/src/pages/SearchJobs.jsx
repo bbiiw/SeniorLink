@@ -139,11 +139,11 @@ const SearchJobs = () => {
         <div className="grid grid-cols-3 gap-6">
           {/* Left Sidebar - Job List */}
           <div
-            className="col-span-1 space-y-6 h-screen overflow-hidden no-scrollbar" 
-            onMouseEnter={handleMouseEnterLeft} 
+            className="col-span-1 space-y-6 h-screen overflow-hidden no-scrollbar"
+            onMouseEnter={handleMouseEnterLeft}
             ref={leftPanelRef}
           >
-            {jobs.length > 0 ? (
+            {Array.isArray(jobs) && jobs.length > 0 ? (
               <>
                 {jobs.slice(0, showAll ? jobs.length : 3).map((job, index) => (
                   <JobCard key={index} job={job} onClick={() => setSelectedJob(job)} />
@@ -164,8 +164,8 @@ const SearchJobs = () => {
 
           {/* Right - Job Detail */}
           <div
-            className="col-span-2 h-screen overflow-hidden no-scrollbar" 
-            onMouseEnter={handleMouseEnterRight} 
+            className="col-span-2 h-screen overflow-hidden no-scrollbar"
+            onMouseEnter={handleMouseEnterRight}
             ref={rightPanelRef}
           >
             {selectedJob ? (
