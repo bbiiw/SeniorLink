@@ -145,9 +145,9 @@ const SearchJobs = () => {
           >
             {jobs.length > 0 ? (
               <>
-                {/* {jobs.slice(0, showAll ? jobs.length : 3).map((job, index) => (
+                {jobs.slice(0, showAll ? jobs.length : 3).map((job, index) => (
                   <JobCard key={index} job={job} onClick={() => setSelectedJob(job)} />
-                ))} */}
+                ))}
                 {jobs.length > 3 && (
                   <button
                     className="btn btn-secondary w-full"
