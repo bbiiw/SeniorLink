@@ -12,7 +12,7 @@ const CompanyProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://34.87.118.33:8000/company/profile/');
+        const response = await axios.get('http://localhost:8000/company/profile/');
         console.log(response.data);
         setProfile(response.data);
         setHasProfile(true);
@@ -41,7 +41,7 @@ const CompanyProfile = () => {
             <div className="relative bg-white rounded-lg shadow-lg">
               <div className="h-64 w-full bg-cover bg-center rounded-t-lg overflow-hidden">
                 <img 
-                  src={profile.background_image ? `http://34.87.118.33:8000${profile.background_image}` : `https://via.placeholder.com/1200x400`} 
+                  src={profile.background_image ? `http://localhost:8000${profile.background_image}` : `https://via.placeholder.com/1200x400`} 
                   alt="background" 
                   className="w-full h-full object-cover"
                 />
@@ -49,7 +49,7 @@ const CompanyProfile = () => {
               {/* Company Logo */}
               <div className="absolute top-40 left-1/2 transform -translate-x-1/2 translate-y-1/2">
                 <img 
-                  src={profile.logo ? `http://34.87.118.33:8000${profile.logo}` : 'https://via.placeholder.com/100'} 
+                  src={profile.logo ? `http://localhost:8000${profile.logo}` : 'https://via.placeholder.com/100'} 
                   alt="Company Logo" 
                   className="w-24 h-24 rounded-full border-4 border-white bg-white shadow-lg" 
                 />
