@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // ทดสอบ backend
-                    sh 'curl http://34.87.118.33:8000/api/healthcheck'
+                    sh 'curl http://34.87.118.33:8000/'
                     // ทดสอบ frontend
                     sh 'curl http://34.87.118.33:5173/'
                 }
