@@ -20,4 +20,4 @@ RUN pip install gunicorn
 COPY . .
 
 # CMD สำหรับการรัน gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8001", "backend.wsgi:application"]
