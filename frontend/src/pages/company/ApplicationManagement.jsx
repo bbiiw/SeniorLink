@@ -10,7 +10,7 @@ const ApplicationManagement = () => {
 
   const fetchApplications = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/company/applications/');
+      const response = await axios.get('http://34.87.118.33:8000/company/applications/');
       console.log(response.data);
       setApplications(response.data);
     } catch (error) {
@@ -24,7 +24,7 @@ const ApplicationManagement = () => {
 
   const handleStatusChange = async (applicationId, newStatusId) => {
     try {
-      await axios.put(`http://localhost:8000/applications/${applicationId}/`, { status: newStatusId });
+      await axios.put(`http://34.87.118.33:8000/applications/${applicationId}/`, { status: newStatusId });
       fetchApplications();
     } catch (error) {
       console.error('Error updating status:', error);
@@ -33,7 +33,7 @@ const ApplicationManagement = () => {
 
   const handleDelete = async (applicationId) => {
     try {
-      await axios.delete(`http://localhost:8000/company/applications/${applicationId}/`);
+      await axios.delete(`http://34.87.118.33:8000/company/applications/${applicationId}/`);
       setApplications((prev) => prev.filter((app) => app.id !== applicationId));
       toast.success("ลบใบสมัครสำเร็จ");
     } catch (error) {
@@ -59,7 +59,7 @@ const ApplicationManagement = () => {
               <div className="flex items-center space-x-6">
                 <div className="w-20 h-20 overflow-hidden rounded-full">
                   <img
-                    src={app.applicant.profile_picture ? `http://localhost:8000${app.applicant.profile_picture}` : 'https://via.placeholder.com/50'}
+                    src={app.applicant.profile_picture ? `http://34.87.118.33:8000${app.applicant.profile_picture}` : 'https://via.placeholder.com/50'}
                     alt={app.applicant.first_name}
                     className="object-cover w-full h-full"
                     />

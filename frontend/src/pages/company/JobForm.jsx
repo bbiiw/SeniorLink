@@ -29,7 +29,7 @@ const JobForm = () => {
     const fetchOptions = async () => {
       try {
         // Fetch job categories
-        const responseCategories = await axios.get('http://localhost:8000/job_category/');
+        const responseCategories = await axios.get('http://34.87.118.33:8000/job_category/');
         const categorySets = responseCategories.data.map(category => ({
           value: category.id,
           label: category.category_name,
@@ -37,7 +37,7 @@ const JobForm = () => {
         setCategoryOptions(categorySets);
 
         // Fetch skills
-        const responseSkills = await axios.get('http://localhost:8000/skills/');
+        const responseSkills = await axios.get('http://34.87.118.33:8000/skills/');
         const skillSets = responseSkills.data.map(skill => ({
           value: skill.id,
           label: skill.name,
@@ -46,7 +46,7 @@ const JobForm = () => {
 
         // Fetch job data (editing)
         if (id) {
-          const response = await axios.get(`http://localhost:8000/positions/${id}/`);
+          const response = await axios.get(`http://34.87.118.33:8000/positions/${id}/`);
           const job = response.data;
           const start_date = convertDate(job.start_date);
           const end_date = convertDate(job.end_date);
@@ -134,9 +134,9 @@ const JobForm = () => {
 
       let response;
       if (id) {
-        response = await axios.put(`http://localhost:8000/positions/${id}/`, data); //แก้ไขงาน
+        response = await axios.put(`http://34.87.118.33:8000/positions/${id}/`, data); //แก้ไขงาน
       } else {
-        response = await axios.post('http://localhost:8000/company_positions/', data); //สร้างงาน
+        response = await axios.post('http://34.87.118.33:8000/company_positions/', data); //สร้างงาน
       }
 
       if (response.status === 200 || response.status === 201) {

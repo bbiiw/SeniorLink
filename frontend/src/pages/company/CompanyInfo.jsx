@@ -27,7 +27,7 @@ const CompanyInfo = () => {
     const fetchData = async () => {
       try {
         // Fetch category options
-        const responseCategory = await axios.get('http://localhost:8000/company/company_category/');
+        const responseCategory = await axios.get('http://34.87.118.33:8000/company/company_category/');
         const options = responseCategory.data.map((category) => ({
           value: category.id,
           label: category.category_name,
@@ -35,15 +35,15 @@ const CompanyInfo = () => {
         setCategoryOptions(options);
 
         // Fetch company data
-        const responseCompany = await axios.get('http://localhost:8000/company/profile/');
+        const responseCompany = await axios.get('http://34.87.118.33:8000/company/profile/');
         setCompanyData({
           ...responseCompany.data,
           company_category: {
             value: responseCompany.data.category.id,
             label: responseCompany.data.category.category_name,
           },
-          logoPreview: responseCompany.data.logo ? `http://localhost:8000${responseCompany.data.logo}` : 'https://via.placeholder.com/100',
-          backgroundPreview: responseCompany.data.background_image ? `http://localhost:8000${responseCompany.data.background_image}` : 'https://via.placeholder.com/1200x400',
+          logoPreview: responseCompany.data.logo ? `http://34.87.118.33:8000${responseCompany.data.logo}` : 'https://via.placeholder.com/100',
+          backgroundPreview: responseCompany.data.background_image ? `http://34.87.118.33:8000${responseCompany.data.background_image}` : 'https://via.placeholder.com/1200x400',
         });
         setIsEditMode(true);
       } catch (error) {
@@ -105,11 +105,11 @@ const CompanyInfo = () => {
     try {
       let response;
       if (isEditMode) {
-        response = await axios.put('http://localhost:8000/company/profile/', formData, {
+        response = await axios.put('http://34.87.118.33:8000/company/profile/', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
       } else {
-        response = await axios.post('http://localhost:8000/company/profile/', formData, {
+        response = await axios.post('http://34.87.118.33:8000/company/profile/', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
       }

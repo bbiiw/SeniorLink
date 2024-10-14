@@ -12,7 +12,7 @@ const JobList = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/company_positions/');
+        const response = await axios.get('http://34.87.118.33:8000/company_positions/');
         setJobs(response.data);
       } catch (error) {
         console.error('Error fetching jobs:', error);
@@ -26,7 +26,7 @@ const JobList = () => {
   // Handle deleting a job
   const handleDelete = async (jobId) => {
     try {
-      await axios.delete(`http://localhost:8000/positions/${jobId}/`);
+      await axios.delete(`http://34.87.118.33:8000/positions/${jobId}/`);
       setJobs(jobs.filter((job) => job.id !== jobId));
       toast.success('ลบตำแหน่งงานสำเร็จ');
     } catch (error) {

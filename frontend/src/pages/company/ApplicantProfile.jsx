@@ -11,7 +11,7 @@ const ApplicantProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/company/applications/profile/${applicantId}/`);
+        const response = await axios.get(`http://34.87.118.33:8000/company/applications/profile/${applicantId}/`);
         console.log(response.data)
         setApplicantProfile(response.data);
       } catch (error) {
@@ -40,7 +40,7 @@ const ApplicantProfile = () => {
             <div className="bg-white p-6 rounded-lg shadow">
               <div className="flex flex-col items-center">
                 <img
-                  src={applicantProfile.profile_picture ? `http://localhost:8000${applicantProfile.profile_picture}` : "https://via.placeholder.com/150"}
+                  src={applicantProfile.profile_picture ? `http://34.87.118.33:8000${applicantProfile.profile_picture}` : "https://via.placeholder.com/150"}
                   alt="Profile"
                   className="w-32 h-32 rounded-full mb-4 object-cover"
                 />
