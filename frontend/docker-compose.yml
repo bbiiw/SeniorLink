@@ -17,7 +17,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend  # เส้นทางไปยัง React frontend
+      context: .  # เส้นทางไปยัง React frontend
       dockerfile: dockerfile  # เส้นทางไปยังไฟล์ Dockerfile ของ React frontend
     container_name: frontend
     stdin_open: true
