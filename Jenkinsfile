@@ -1,17 +1,65 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE_FRONTEND = 'earth123456789/seniorfrontend:latest'
+        DOCKER_IMAGE_BACKEND = 'earth123456789/seniorbackend:latest'
+        DOCKER_CREDENTIALS = credentials('dockerhub')
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
                 script {
-                    // Checkout
+                    // Checkout 
                     git url: 'https://github.com/bbiiw/SeniorLink.git', branch: 'dev'
                 }
             }
         }
 
-        stage('Build and Start Docker Compose') {
+        stage('Build Frontend Docker Image') {
+            steps {
+                script {
+                    // Build Frontend
+                    dir('frontend') {
+                        sh 'docker build -t $DOCKER_IMAGE_FRONTEND .'
+                    }
+                }
+            }
+        }
+
+        stage('Build Backend Docker Image') {
+            steps {
+                script {
+                    // Build Backend
+                    dir('backend') {
+                        sh 'docker build -t $DOCKER_IMAGE_BACKEND .'
+                    }
+                }
+            }
+        }
+
+        stage('Push Frontend Docker Image to Docker Hub') {
+            steps {
+                script {
+                    // Login to Docker Hub Push Image Frontend
+                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
+                    sh 'docker push $DOCKER_IMAGE_FRONTEND'
+                }
+            }
+        }
+
+        stage('Push Backend Docker Image to Docker Hub') {
+            steps {
+                script {
+                    // Login to Docker Hub Push Image Backend
+                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
+                    sh 'docker push $DOCKER_IMAGE_BACKEND'
+                }
+            }
+        }
+
+        stage('Start Docker Compose') {
             steps {
                 script {
                     // ใช้คำสั่ง docker-compose เพื่อ build และ run ทั้ง frontend และ backend
@@ -19,25 +67,5 @@ pipeline {
                 }
             }
         }
-
-        // stage('Test Frontend and Backend') {
-        //     steps {
-        //         script {
-        //             // ทดสอบ backend
-        //             sh 'curl http://34.87.118.33:8000/'
-        //             // ทดสอบ frontend
-        //             sh 'curl http://34.87.118.33:5173/'
-        //         }
-        //     }
-        // }
     }
-
-    // post {
-    //     always {
-    //         script {
-    //             // หยุดและลบ container ทั้งหมด
-    //             sh 'docker-compose -f docker-compose.yml down'
-    //         }
-    //     }
-    // }
 }
