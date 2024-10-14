@@ -22,7 +22,7 @@ const SearchJobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://34.87.118.33/positions/');
+        const response = await axios.get('http://34.87.118.33:80/positions/');
         setJobs(response.data);
         if (response.data.length > 0) {
           setSelectedJob(response.data[0]);
