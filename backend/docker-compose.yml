@@ -18,7 +18,7 @@ services:
       bash -c "
       python manage.py makemigrations &&
       python manage.py migrate &&
-      gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --workers 3
+      gunicorn backend.wsgi:application --bind 0.0.0.0:8001 --workers 3
       "
 
   db:
