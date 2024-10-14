@@ -1,7 +1,7 @@
-# Dockerfile for React frontend
+# Dockerfile for React frontend in production
 
-# ใช้ Node.js เป็น Base Image
-FROM node:20
+# Step 1: Build React app with Node.js
+FROM node:20 AS build
 
 # ตั้งค่า Working Directory
 WORKDIR /app
@@ -9,17 +9,23 @@ WORKDIR /app
 # คัดลอก package.json และ package-lock.json
 COPY package*.json ./
 
-# ลบ node_modules และ package-lock.json ถ้ามีอยู่
-RUN rm -rf node_modules package-lock.json
-
 # ติดตั้ง Dependencies
 RUN npm install
 
 # คัดลอกโค้ดทั้งหมด
 COPY . .
 
-# เปิดพอร์ต 5173 สำหรับ Vite Development Server
-EXPOSE 5173
+# สร้างไฟล์ production โดยใช้คำสั่ง build
+RUN npm run build
 
-# เริ่ม Vite Development Server
-CMD ["npm", "run", "dev"]
+# Step 2: Serve the app with Nginx
+FROM nginx:alpine
+
+# คัดลอกไฟล์ static จากขั้นตอน build ไปยัง nginx เพื่อให้เสิร์ฟไฟล์ static
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# เปิดพอร์ต 80 สำหรับ Nginx
+EXPOSE 80
+
+# เริ่ม Nginx
+CMD ["nginx", "-g", "daemon off;"]
