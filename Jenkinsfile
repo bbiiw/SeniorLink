@@ -8,6 +8,14 @@ pipeline {
     }
 
     stages {
+        stage('Start Jenkins') {
+            steps {
+                // Logging for debugging purposes
+                echo 'Start Jenkins............'
+                echo "docker : user = ${DOCKER_CREDENTIALS_USR} : password = ${DOCKER_CREDENTIALS_PSW}"
+            }
+        }
+
         stage('Checkout Code') {
             steps {
                 script {
