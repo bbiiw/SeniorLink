@@ -10,14 +10,14 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code
 
 # Install dependencies
-COPY ./requirements.txt .
+COPY ./requirements.txt . 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy project
+# ติดตั้ง gunicorn
+RUN pip install gunicorn
+
+# Copy project files
 COPY . .
 
-# Expose port 8000
-EXPOSE 8000
-
-# Use Gunicorn to serve the Django app
-CMD ["gunicorn", "--workers", "3", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
+# CMD สำหรับการรัน gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
