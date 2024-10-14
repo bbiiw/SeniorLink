@@ -1,58 +1,50 @@
-version: '3.8'
+version: '3'
 
 services:
-  backend:
-    build:
-      context: ./backend  # เส้นทางไปยัง Django backend
-      dockerfile: dockerfile  # ชื่อไฟล์ Dockerfile
-    container_name: backend
-    volumes:
-      - ./backend:/code  # ใช้ในการพัฒนาเพื่อแมพไฟล์โค้ด
+  nginx:
+    image: nginx:latest
+    container_name: nginx
     ports:
-      - "8000:8000"  # Django API จะเข้าถึงได้ที่พอร์ต 8000
-    env_file:
-      - ./backend/.env  # ตรวจสอบว่าไฟล์ .env มีอยู่ในตำแหน่งที่ถูกต้อง
+      - "80:80"  # ทำให้ nginx รันบนพอร์ต 80 ของเครื่อง host
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Mount nginx.conf
     depends_on:
-      - db
+      - frontend
+      - backend
+    networks:
+      - mynetwork
 
   frontend:
-    build:
-      context: ./frontend  # เส้นทางไปยัง React frontend
-      dockerfile: dockerfile  # เส้นทางไปยังไฟล์ Dockerfile ของ React frontend
-    container_name: frontend
-    stdin_open: true
-    tty: true
-    ports:
-      - "5173:5173"  # React frontend จะเข้าถึงได้ที่พอร์ต 5173
+    image: earth123456789/seniorfrontend:latest
+    container_name: seniorlink_frontend_1  # กำหนดชื่อ container ให้ชัดเจน
+    networks:
+      - mynetwork
     environment:
-      - CHOKIDAR_USEPOLLING=true
-    depends_on:
-      - backend
+      - VITE_API_URL=http://nginx/api  # บอก Frontend ว่าจะใช้ API ผ่าน Nginx
+
+  backend:
+    image: earth123456789/seniorbackend:latest
+    container_name: seniorlink_backend_1  # กำหนดชื่อ container ให้ชัดเจน
+    networks:
+      - mynetwork
+    environment:
+      POSTGRES_DB: senior_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      DB_HOST: db  # ระบุให้ชัดเจนว่าใช้ฐานข้อมูลจาก container db
+      DB_PORT: 5432
+      ALLOWED_HOSTS: 'nginx,localhost,34.87.118.33'
 
   db:
     image: postgres
-    container_name: db
+    container_name: seniorlink_db_1
     environment:
-      POSTGRES_DB: intern_db
+      POSTGRES_DB: senior_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - mynetwork
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: 1234
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-
-volumes:
-  postgres_data:
-  pgadmin_data:
+networks:
+  mynetwork:
+    driver: bridge
