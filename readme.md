@@ -24,5 +24,5 @@ Dev tools Project 2/2567
 ### then open
 
 ```sh
-http://localhost:3000/
+http://34.87.118.33:5173/
 ```
