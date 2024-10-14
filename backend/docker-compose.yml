@@ -5,7 +5,7 @@ services:
     build:
       context: .  # เส้นทางไปยัง Django backend
       dockerfile: dockerfile  # ชื่อไฟล์ Dockerfile
-    container_name: backend
+    container_name: seniorlink_backend_1  # ชื่อ container ของ backend
     volumes:
       - .:/code  # ใช้ในการพัฒนาเพื่อแมพไฟล์โค้ด
     ports:
@@ -23,7 +23,7 @@ services:
 
   db:
     image: postgres
-    container_name: db
+    container_name: seniorlink_db_1  # ชื่อ container ของฐานข้อมูล
     environment:
       POSTGRES_DB: senior_db
       POSTGRES_USER: postgres
