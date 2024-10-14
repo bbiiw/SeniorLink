@@ -68,4 +68,12 @@ pipeline {
             }
         }
     }
+      post {
+        always {
+            script {
+                // หยุดและลบ container ทั้งหมด
+                sh 'docker-compose -f docker-compose.yml down'
+            }
+        }
+    }
 }
