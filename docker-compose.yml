@@ -1,76 +1,38 @@
 version: '3'
 
 services:
-
-################################################################# BACKEND ##################################################################################################
-
-  backend:
-    build:
-      context: ./backend  # backend
-      dockerfile: Dockerfile  # Dockerfile
-    container_name: backend
-    volumes:
-      - ./backend:/code  # สร้าง volumes
+  nginx:
+    image: nginx:latest
+    container_name: nginx
     ports:
-      - "8000:8000"  # Django API จะเข้าถึงได้ที่พอร์ต 8000 (Map port)
-    env_file:
-      - ./backend/.env  # ดูไฟล์ .env เพื่อเช็คสภาพแวดล้อม
+      - "80:80"  # ทำให้ nginx รันบนพอร์ต 80 ของเครื่อง host
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Mount nginx.conf
+    depends_on:
+      - frontend
+      - backend
     networks:
       - mynetwork
-    depends_on:
-      - db
-
-################################################################# FRONTEND #################################################################################################
 
   frontend:
-    build:
-      context: ./frontend  # frontend
-      dockerfile: Dockerfile  # Dockerfile
-    container_name: frontend
-    ports:
-      - "5173:5173"  # React frontend จะเข้าถึงได้ที่พอร์ต 5173 (Map port)
+    image: earth123456789/seniorfrontend:latest
     networks:
-      - mynetwork # ใช้ตรงนี้
-    depends_on:
-      - backend
+      - mynetwork
 
-################################################################# DATABASE ##################################################################################################
+  backend:
+    image: earth123456789/seniorbackend:latest
+    networks:
+      - mynetwork
 
   db:
     image: postgres
-    container_name: db
     environment:
       POSTGRES_DB: senior_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
     networks:
       - mynetwork
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: 1234
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-    networks:
-      - mynetwork
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-
-
-################################################################# Networks ##################################################################################################
 networks:
-  mynetwork:  # ชื่อ network
-    driver: bridge # Bridge network = ใช้ ชื่อ container สื่อสารแทน IP Address
-
-################################################################# Volumes ##################################################################################################
-volumes:
-  postgres_data:
-  pgadmin_data:
+  mynetwork:
+    driver: bridge
