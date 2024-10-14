@@ -5,12 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173, // เปิดพอร์ต 5173
-    host: '0.0.0.0', // เปิดให้ทุก IP เข้าถึงได้ (ไม่ใช่แค่ localhost)
-    hmr: {
-      host: '34.87.118.33', // กำหนด IP เซิร์ฟเวอร์จริงสำหรับ WebSocket
-      port: 5173,
-    },
+    port: 5173, // เปลี่ยนพอร์ตที่นี่
+    host: true, // เปิดให้เข้าถึงจากเครือข่ายอื่น ๆ
   },
 });
-
