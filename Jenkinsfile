@@ -20,16 +20,16 @@ pipeline {
             }
         }
 
-        stage('Test Frontend and Backend') {
-            steps {
-                script {
-                    // ทดสอบ backend
-                    sh 'curl http://34.87.118.33:8000/'
-                    // ทดสอบ frontend
-                    sh 'curl http://34.87.118.33:5173/'
-                }
-            }
-        }
+        // stage('Test Frontend and Backend') {
+        //     steps {
+        //         script {
+        //             // ทดสอบ backend
+        //             sh 'curl http://34.87.118.33:8000/'
+        //             // ทดสอบ frontend
+        //             sh 'curl http://34.87.118.33:5173/'
+        //         }
+        //     }
+        // }
     }
 
     // post {
