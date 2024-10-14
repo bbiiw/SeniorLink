@@ -1,10 +1,13 @@
+version: '3'
+
 services:
   nginx:
     image: nginx:latest
+    container_name: nginx
     ports:
-      - "80:80"
+      - "80:80"  # ทำให้ nginx รันบนพอร์ต 80 ของเครื่อง host
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Mount nginx.conf
     depends_on:
       - frontend
       - backend
@@ -13,28 +16,32 @@ services:
 
   frontend:
     image: earth123456789/seniorfrontend:latest
-    container_name: seniorlink_frontend_1
+    container_name: seniorlink_frontend_1  # กำหนดชื่อ container ให้ชัดเจน
     networks:
       - mynetwork
     environment:
-      - VITE_API_URL=http://nginx/api
+      - VITE_API_URL=http://nginx/api  # บอก Frontend ว่าจะใช้ API ผ่าน Nginx
 
   backend:
     image: earth123456789/seniorbackend:latest
-    container_name: seniorlink_backend_1
+    container_name: seniorlink_backend_1  # กำหนดชื่อ container ให้ชัดเจน
     networks:
       - mynetwork
     environment:
       POSTGRES_DB: senior_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      DB_HOST: db
+      DB_HOST: db  # ระบุให้ชัดเจนว่าใช้ฐานข้อมูลจาก container db
       DB_PORT: 5432
       ALLOWED_HOSTS: 'nginx,localhost,34.87.118.33'
 
   db:
     image: postgres
     container_name: seniorlink_db_1
+    environment:
+      POSTGRES_DB: senior_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     networks:
       - mynetwork
 
