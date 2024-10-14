@@ -7,6 +7,17 @@ pipeline {
         DOCKER_CREDENTIALS = credentials('dockerhub')
     }
 
+
+    stages {
+        stage('Start Jenkins') {
+            steps {
+                // Checkout your source code from version control
+             
+                    sh 'echo Start Jenkins............'
+                    sh 'echo docker : user = $DOCKER_CREDENTIALS_USR : password = $DOCKER_CREDENTIALS_PSW'
+            }
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
