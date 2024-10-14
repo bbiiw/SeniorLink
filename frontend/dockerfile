@@ -1,5 +1,3 @@
-# Dockerfile for React frontend
-
 # ใช้ Node.js เป็น Base Image
 FROM node:20
 
@@ -9,13 +7,10 @@ WORKDIR /app
 # คัดลอก package.json และ package-lock.json
 COPY package*.json ./
 
-# ลบ node_modules และ package-lock.json ถ้ามีอยู่
-RUN rm -rf node_modules package-lock.json
-
-# ติดตั้ง Dependencies
+# ติดตั้ง Dependencies โดยใช้ cache ของ Docker เพื่อให้การ build เร็วขึ้นในครั้งถัดไป
 RUN npm install
 
-# คัดลอกโค้ดทั้งหมด
+# คัดลอกโค้ดทั้งหมดไปยัง container
 COPY . .
 
 # เปิดพอร์ต 5173 สำหรับ Vite Development Server
