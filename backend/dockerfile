@@ -1,0 +1,26 @@
+# Pull base image
+FROM python:3.12.0
+
+# Set environment variables
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# Set work directory
+WORKDIR /code
+
+# Install dependencies
+COPY ./requirements.txt /code/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install gunicorn
+RUN pip install gunicorn
+
+# Copy project files
+COPY . /code/
+
+# Expose the port that Gunicorn will listen on
+EXPOSE 8001
+
+# CMD for running gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:8001", "backend.wsgi:application"]
