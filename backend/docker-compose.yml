@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .  # เส้นทางไปยัง Django backend
+      dockerfile: dockerfile  # ชื่อไฟล์ Dockerfile
+    container_name: backend
+    volumes:
+      - .:/code  # ใช้ในการพัฒนาเพื่อแมพไฟล์โค้ด
+    ports:
+      - "8000:8000"  # Django API จะเข้าถึงได้ที่พอร์ต 8000
+    env_file:
+      - .env  # ตรวจสอบว่าไฟล์ .env มีอยู่ในตำแหน่งที่ถูกต้อง
+    depends_on:
+      - db
+    command: >
+      bash -c "
+      python manage.py makemigrations &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000
+      "
+
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      POSTGRES_DB: senior_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:

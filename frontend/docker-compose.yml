@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend  # เส้นทางไปยัง Django backend
+      dockerfile: dockerfile  # ชื่อไฟล์ Dockerfile
+    container_name: backend
+    volumes:
+      - ./backend:/code  # ใช้ในการพัฒนาเพื่อแมพไฟล์โค้ด
+    ports:
+      - "8000:8000"  # Django API จะเข้าถึงได้ที่พอร์ต 8000
+    env_file:
+      - ./backend/.env  # ตรวจสอบว่าไฟล์ .env มีอยู่ในตำแหน่งที่ถูกต้อง
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend  # เส้นทางไปยัง React frontend
+      dockerfile: dockerfile  # เส้นทางไปยังไฟล์ Dockerfile ของ React frontend
+    container_name: frontend
+    stdin_open: true
+    tty: true
+    ports:
+      - "5173:5173"  # React frontend จะเข้าถึงได้ที่พอร์ต 5173
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      POSTGRES_DB: intern_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
