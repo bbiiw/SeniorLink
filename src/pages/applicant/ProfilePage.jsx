@@ -12,7 +12,7 @@ const ProfilePage = () => {
     // ดึงข้อมูลโปรไฟล์จากเซิร์ฟเวอร์
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/applicant/profile/');
+        const response = await axios.get('http://34.87.118.33:8000/applicant/profile/');
 
         console.log(response.data);
         setProfile(response.data);
@@ -44,7 +44,7 @@ const ProfilePage = () => {
               <div className="bg-white p-6 rounded-lg shadow">
                 <div className="flex flex-col items-center">
                   <img
-                    src={profile.profile_picture ? `http://localhost:8000${profile.profile_picture}` : "https://via.placeholder.com/150"}
+                    src={profile.profile_picture ? `http://34.87.118.33:8000${profile.profile_picture}` : "https://via.placeholder.com/150"}
                     alt="Profile"
                     className="w-32 h-32 rounded-full mb-4 object-cover"
                   />

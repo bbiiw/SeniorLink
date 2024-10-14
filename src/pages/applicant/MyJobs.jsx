@@ -11,7 +11,7 @@ const MyJobs = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/applicant/applications/`);
+        const response = await axios.get(`http://34.87.118.33:8000/applicant/applications/`);
         setApplications(response.data);
       } catch (error) {
         toast.error("เกิดข้อผิดพลาดในการดึงข้อมูลงานที่สมัคร");
@@ -24,7 +24,7 @@ const MyJobs = () => {
   // Handle delete application
   const handleDelete = async (applicationId) => {
     try {
-      await axios.delete(`http://localhost:8000/applicant/applications/${applicationId}/`);
+      await axios.delete(`http://34.87.118.33:8000/applicant/applications/${applicationId}/`);
       setApplications(applications.filter(app => app.id !== applicationId));
       toast.success("ลบใบสมัครงานสำเร็จ");
     } catch (error) {
@@ -45,7 +45,7 @@ const MyJobs = () => {
             <div key={app.id} className="bg-white p-6 rounded-lg shadow-lg flex justify-between items-center">
               {/* Left Content: Company and Job Information */}
               <div className="flex items-center space-x-4">
-                <img src={`http://localhost:8000${app.job.company.logo}`} alt={app.job.company.name} className="w-12 h-12 rounded-full" />
+                <img src={`http://34.87.118.33:8000${app.job.company.logo}`} alt={app.job.company.name} className="w-12 h-12 rounded-full" />
                 <div>
                   <h3 className="text-xl font-semibold">{app.job.company.name}</h3>
                   <p className="text-gray-500">{app.job.title}</p>

@@ -12,7 +12,7 @@ const LoginCompany = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/authen/login/company/', {
+      const response = await axios.post('http://34.87.118.33:8000/authen/login/company/', {
         email: email,
         password: password
       });

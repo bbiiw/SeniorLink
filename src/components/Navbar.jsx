@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const Logout = async () => {
     try {
-      await axios.post('http://localhost:8000/authen/logout/');
+      await axios.post('http://34.87.118.33:8000/authen/logout/');
 
       localStorage.removeItem('role');
       localStorage.removeItem('username');

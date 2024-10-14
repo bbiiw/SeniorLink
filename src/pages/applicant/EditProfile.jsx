@@ -31,7 +31,7 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/applicant/profile/');
+        const response = await axios.get('http://34.87.118.33:8000/applicant/profile/');
         const mapSkills = response.data.myskills.map(skill => ({ value: skill.id, label: skill.name }));
         
         setProfileData({
@@ -74,11 +74,11 @@ const EditProfile = () => {
       let response;
       if (isEditMode) {
         // แก้ไขโปรไฟล์ (PUT request)
-        response = await axios.put('http://localhost:8000/applicant/profile/', formData, { 
+        response = await axios.put('http://34.87.118.33:8000/applicant/profile/', formData, { 
           headers: {'Content-Type': 'multipart/form-data' }});
         } else {
         // สร้างโปรไฟล์ใหม่ (POST request)
-        response = await axios.post('http://localhost:8000/applicant/profile/', formData, { 
+        response = await axios.post('http://34.87.118.33:8000/applicant/profile/', formData, { 
           headers: {'Content-Type': 'multipart/form-data' }});
       }
 

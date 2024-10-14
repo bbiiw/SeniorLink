@@ -22,7 +22,7 @@ const RegisterCompany = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/authen/register/company/', {
+      const response = await axios.post('http://34.87.118.33:8000/authen/register/company/', {
         email: email,
         username: username,
         password: password,

@@ -15,7 +15,7 @@ const RegisterApplicant = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post('http://localhost:8000/authen/register/applicant/', {
+        const response = await axios.post('http://34.87.118.33:8000/authen/register/applicant/', {
             email: email,
             username: username,
             password: password,

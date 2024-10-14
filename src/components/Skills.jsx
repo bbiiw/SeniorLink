@@ -12,7 +12,7 @@ const Skills = ({ profileData, setProfileData }) => {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/skills/');
+        const response = await axios.get('http://34.87.118.33:8000/skills/');
         const mapSkills = response.data.map(skill => ({ value: skill.id, label: skill.name }));
         setSkillOptions(mapSkills);
       } catch (error) {

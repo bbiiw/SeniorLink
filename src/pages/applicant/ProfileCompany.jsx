@@ -14,7 +14,7 @@ const ProfileCompany = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/applicant/applications/profile/${companyId}`);
+        const response = await axios.get(`http://34.87.118.33:8000/applicant/applications/profile/${companyId}`);
         setProfile(response.data);
         setHasProfile(true);
       } catch (error) {
@@ -25,7 +25,7 @@ const ProfileCompany = () => {
     // Fetch job positions for the company
     const fetchJobs = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/company_positions/${companyId}/`);
+        const response = await axios.get(`http://34.87.118.33:8000/company_positions/${companyId}/`);
         console.log(response.data)
         setJobs(response.data);
       } catch (error) {
@@ -55,7 +55,7 @@ const ProfileCompany = () => {
             <div className="relative bg-white rounded-lg shadow-lg">
               <div className="h-64 w-full bg-cover bg-center rounded-t-lg overflow-hidden">
                 <img 
-                  src={profile.background_image ? `http://localhost:8000${profile.background_image}` : `https://via.placeholder.com/1200x400`} 
+                  src={profile.background_image ? `http://34.87.118.33:8000${profile.background_image}` : `https://via.placeholder.com/1200x400`} 
                   alt="background" 
                   className="w-full h-full object-cover"
                 />
@@ -63,7 +63,7 @@ const ProfileCompany = () => {
               {/* Company Logo */}
               <div className="absolute top-40 left-1/2 transform -translate-x-1/2 translate-y-1/2">
                 <img 
-                  src={profile.logo ? `http://localhost:8000${profile.logo}` : 'https://via.placeholder.com/100'} 
+                  src={profile.logo ? `http://34.87.118.33:8000${profile.logo}` : 'https://via.placeholder.com/100'} 
                   alt="Company Logo" 
                   className="w-24 h-24 rounded-full border-4 border-white bg-white shadow-lg" 
                 />
@@ -110,7 +110,7 @@ const ProfileCompany = () => {
                     <div key={index} className="border-2 p-4 rounded-lg shadow-lg flex items-center space-x-4">
                       {/* Job Logo */}
                       <div className="w-16 h-16 flex-shrink-0">
-                        <img src={job.company.logo ? `http://localhost:8000${job.company.logo}` : `https://via.placeholder.com/50`} alt="Job Logo" className="w-full h-full object-cover rounded-md" />
+                        <img src={job.company.logo ? `http://34.87.118.33:8000${job.company.logo}` : `https://via.placeholder.com/50`} alt="Job Logo" className="w-full h-full object-cover rounded-md" />
                       </div>
                       <div className="flex-1">
                         <h3 className="text-lg font-semibold">{job.title}</h3>

@@ -38,7 +38,7 @@ const JobCard = ({ job, onClick }) => {
 
       {/* Right Content: Company Logo */}
       <div className="flex-shrink-0">
-        <img src={`http://localhost:8000${job.company.logo}`} alt={`${job.company.name} Logo`} className="w-16 h-16 rounded-lg" />
+        <img src={`http://34.87.118.33:8000${job.company.logo}`} alt={`${job.company.name} Logo`} className="w-16 h-16 rounded-lg" />
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const LoginApplicant = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/authen/login/applicant/', {
+      const response = await axios.post('http://34.87.118.33:8000/authen/login/applicant/', {
         email: email,
         password: password
       });

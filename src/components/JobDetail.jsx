@@ -16,7 +16,7 @@ const JobDetail = ({ job }) => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:8000/apply/${job.id}/`);
+      const response = await axios.post(`http://34.87.118.33:8000/apply/${job.id}/`);
       toast.success(response.data.message || "สมัครงานสำเร็จแล้ว");
       console.log(response.data);
       setIsModalOpen(false);
@@ -30,7 +30,7 @@ const JobDetail = ({ job }) => {
       <div className="relative">
         <img
           src={job.company.background_image 
-            ? `http://localhost:8000${job.company.background_image}` 
+            ? `http://34.87.118.33:8000${job.company.background_image}` 
             : "https://via.placeholder.com/1000x200"}
           alt="company building"
           className="rounded-md mb-4 h-40 w-full object-cover"
@@ -88,7 +88,7 @@ const JobDetail = ({ job }) => {
             <div className="avatar">
               <div className="w-12 rounded-full">
                 <img
-                  src={`http://localhost:8000${job.company.logo}` || "https://via.placeholder.com/150"}
+                  src={`http://34.87.118.33:8000${job.company.logo}` || "https://via.placeholder.com/150"}
                   alt="company logo"
                 />
               </div>

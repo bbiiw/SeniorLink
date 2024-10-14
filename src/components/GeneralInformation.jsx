@@ -8,7 +8,7 @@ const GeneralInformation = ({ profileData, setProfileData }) => {
   // Initialize image preview if profileData has a profile_picture URL
   useEffect(() => {
     if (typeof profileData.profile_picture === 'string' && profileData.profile_picture) {
-      setImagePreview(`http://localhost:8000${profileData.profile_picture}`);
+      setImagePreview(`http://34.87.118.33:8000${profileData.profile_picture}`);
     }
 
     if (profileData.birth_date && profileData.birth_date.includes('/')) {
